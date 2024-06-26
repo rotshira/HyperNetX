@@ -16,6 +16,7 @@ import logging
 # Configure logging
 logging.basicConfig(level=logging.DEBUG, format='%(asctime)s - %(levelname)s - %(message)s')
 
+
 def approximation_matching_checking(optimal: list, approx: list) -> bool:
     for e in optimal:
         count = 0

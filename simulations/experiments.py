@@ -74,6 +74,7 @@ def define_experiment():
 
     return experiment
 
+
 if __name__ == "__main__":
     experiment = define_experiment()
 
