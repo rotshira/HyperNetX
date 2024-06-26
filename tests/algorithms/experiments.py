@@ -9,6 +9,7 @@ import pandas as pd
 import logging
 from matplotlib import pyplot as plt
 import seaborn as sns
+from hypernetx.algorithms.epsilonmatching import *
 
 from hypernetx.algorithms.matching_algorithms import (
     maximal_matching,
@@ -36,7 +37,7 @@ def run_experiment(algorithm, n, d, m, s):
 
     logger.info(f"Running {algorithm.__name__} with n={n}, d={d}, m={m}, s={s}")
     start_time = time.time()
-    matching = algorithm(hypergraph, s)
+    matching = algorithm(hypergraph, s,max_matching_fn = local_search_matching)
     end_time = time.time()
 
     match_size = len(matching)
@@ -59,7 +60,7 @@ def define_experiment():
 
     sizes = [100, 200, 400, 800, 1600]
     d = 3
-    m = 100
+    m = 2000
     s = 10
 
     for n in sizes:
