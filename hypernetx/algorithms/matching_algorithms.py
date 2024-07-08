@@ -4,9 +4,8 @@ An implementation of the algorithms in:
 Programmer: Shira Rot, Niv
 Date: 22.5.2024
 """
-from datetime import time
-from functools import lru_cache
 
+from functools import lru_cache
 import numpy as np
 import hypernetx as hnx
 from hypernetx.classes.hypergraph import Hypergraph
@@ -114,24 +113,25 @@ class NonUniformHypergraphError(Exception):
 
 
 
-# Helper functions
+#necessary because Python's lru_cache decorator
+# requires hashable inputs to cache function results.
 def edge_tuple(hypergraph):
     """Convert hypergraph edges to a hashable tuple."""
     return tuple((edge, tuple(sorted(hypergraph.edges[edge]))) for edge in sorted(hypergraph.edges))
 
 
-@lru_cache(maxsize=None)
+@lru_cache(maxsize=None)  #to cache the results of this function
 def cached_maximal_matching(edges):
     """Cached version of maximal matching calculation."""
-    hypergraph = hnx.Hypergraph(dict(edges))
+    hypergraph = hnx.Hypergraph(dict(edges)) #Converts the tuple of edges back into a hypergraph.
     matching = []
-    matched_vertices = set()
+    matched_vertices = set() #vertices that have already been matched.
 
     for edge in hypergraph.incidence_dict.values():
-        if not any(vertex in matched_vertices for vertex in edge):
-            matching.append(sorted(edge))
+        if not any(vertex in matched_vertices for vertex in edge): #Checks if any vertex in the current edge is already matched.
+            matching.append(sorted(edge)) #Adds the current edge to the matching if no vertex is already matched.
             matched_vertices.update(edge)
-    return matching
+    return matching   #Returns the list of matching edges.
 
 
 def maximal_matching(hypergraph: Hypergraph) -> list:
@@ -448,5 +448,5 @@ def HEDCS_matching(hypergraph: Hypergraph, s: int) -> list:
 
 if __name__ == '__main__':
     import doctest
-
     doctest.testmod()
+

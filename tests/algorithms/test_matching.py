@@ -1,3 +1,11 @@
+"""
+An implementation of the algorithms in:
+"Distributed Algorithms for Matching in Hypergraphs", by Oussama Hanguir and Clifford Stein (2020), https://arxiv.org/abs/2009.09605v1
+Programmer: Shira Rot, Niv
+Date: 22.5.2024
+"""
+
+
 import pytest
 from hypernetx.classes.hypergraph import Hypergraph
 from hypernetx.algorithms.matching_algorithms import greedy_matching, HEDCS_matching, \
