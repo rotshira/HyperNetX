@@ -5,7 +5,6 @@ from hypernetx.algorithms.matching_algorithms import greedy_matching, iterated_s
 
 app = Flask(__name__)
 
-
 def parse_hypergraph(data):
     try:
         edges = {}
